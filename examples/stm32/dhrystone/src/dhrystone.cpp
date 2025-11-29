@@ -63,7 +63,8 @@ struct tms      time_info;
 extern  int     times ();
                 /* see library function "times" */
 #define Too_Small_Time 120
-                /* Measurements should last at least about 2 seconds */
+//#define Too_Small_Time 2	// NOTE: changed to fit second counter on STM32.
+                /* Measurements should last at least about 2 seconds */ // FIXME: minutes?
 #endif
 #ifdef TIME
 extern long     time();
@@ -171,7 +172,7 @@ int main () {
 		printf ("\n");
 	}
 	
-	Number_Of_Runs = 10000000; // 10 million
+	Number_Of_Runs = 100000000; // 100 million
 	/* printf ("Please give the number of runs through the benchmark: ");
 	{
 		int n;
@@ -327,10 +328,9 @@ int main () {
 							/ (float) Number_Of_Runs;
 		Dhrystones_Per_Second = (float) Number_Of_Runs / (float) User_Time;
 #else
-		// Note: replaced original 'HZ' with SystemCoreClock.
 		Microseconds = (float) User_Time * Mic_secs_Per_Second 
-							/ ((float) SystemCoreClock * ((float) Number_Of_Runs));
-		Dhrystones_Per_Second = ((float) SystemCoreClock * (float) Number_Of_Runs)
+							/ ((float) HZ * ((float) Number_Of_Runs));
+		Dhrystones_Per_Second = ((float) HZ * (float) Number_Of_Runs)
 							/ (float) User_Time;
 #endif
 		printf ("Microseconds for one run through Dhrystone: ");

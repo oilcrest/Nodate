@@ -13,6 +13,7 @@ NDLANGUAGE ?= cpp
 #BOARD ?= stm32f4-discovery
 #BOARD ?= nucleo-f746zg
 #BOARD ?= black_pill_f411
+#BOARD ?= black_pill_f401
 BOARD ?= blue_pill
 
 # Set the MCU and programmer types.
@@ -30,7 +31,7 @@ APP_C_FILES = src/dhry_2.c
 #APP_C_FILES = $(wildcard src/*.c)
 
 # App C & C++ flags.
-APP_FLAGS = -DMSC_CLOCK -DHZ=60
+APP_FLAGS = -DMSC_CLOCK -DHZ=1
 APP_C_FLAGS = 
 APP_CPP_FLAGS = 
 
